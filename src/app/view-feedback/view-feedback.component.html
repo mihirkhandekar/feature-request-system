@@ -1,0 +1,30 @@
+<br />
+<br />
+<table class="table table-sm table-striped table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Client</th>
+        <th>Priority</th>
+        <th>Date</th>
+    </tr>
+    <tr *ngFor="let customer of responseArray">
+        <td>{{customer.name}}</td>
+        <td>{{customer.description}}</td>
+        <td>{{customer.client}}</td>
+        <td>{{customer.priority}}</td>
+        <td>{{customer.date}}</td>
+    </tr>
+</table>
+<!--<table class="table table-sm table-striped table-bordered">
+    <th *ngFor="let column of headers">
+        {{column}}
+    </th>
+
+    <tr *ngFor="let row of rows">
+        <td *ngFor="let column of headers">
+            {{row[column]}}
+        </td>
+    </tr>
+
+</table>-->

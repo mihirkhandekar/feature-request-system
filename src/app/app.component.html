@@ -1,0 +1,14 @@
+<div style="text-align: center;">
+    <h1>Feature Request System</h1>
+    <button (click)="div1Function()" class="btn btn-primary btn-sm" [ngClass]="{'btn-primary': div1, 'btn-secondary': div2}">Create Feature Request</button>
+    <button (click)="div2Function()" class="btn btn-secondary btn-sm" [ngClass]="{'btn-secondary': div1, 'btn-primary': div2}">View Feature Requests</button>
+</div>
+
+
+<div *ngIf="div1">
+    <app-submit-feedback></app-submit-feedback>
+</div>
+
+<div *ngIf="div2">
+    <app-view-feedback></app-view-feedback>
+</div>

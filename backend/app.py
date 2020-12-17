@@ -7,7 +7,7 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Set up the SQLAlchemy Database to be a local file 'desserts.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///features.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/features.db'
 db = SQLAlchemy(app)
 
 
@@ -20,4 +20,4 @@ if __name__ == "__main__":
 
     from views import *
 
-    app.run(debug=True)
+    app.run(debug=True, host= '0.0.0.0')

@@ -12,7 +12,9 @@ import { HttpClient } from '@angular/common/http';
 export class SubmitFeedbackComponent implements OnInit {
   form: FormGroup;
   respMessage: string = '';
-
+  errorMessage:string = '';
+  warningMessage:string = '';
+  today=new Date()
   constructor(
     public fb: FormBuilder,
     private http: HttpClient
@@ -27,10 +29,18 @@ export class SubmitFeedbackComponent implements OnInit {
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.respMessage = ''
+    this.errorMessage = ''
+    this.warningMessage = ''
+  }
 
 
   submitForm() {
+    this.respMessage = ''
+    this.errorMessage = ''
+    this.warningMessage = ''
+
     var formData: any = new FormData();
     formData.append("name", this.form.get('name').value);
     formData.append("description", this.form.get('description').value);
@@ -40,13 +50,20 @@ export class SubmitFeedbackComponent implements OnInit {
     formData.append("productarea", this.form.get('productarea').value);
 
     this.http.post('http://localhost:5000/api/featurerequest', formData).subscribe(
-      (response) => {
+      (response:Response) => {
         console.log(response);
-        this.respMessage = 'Successfully added!';
+        var message = response['message']
+        var sim = response['similarity_count']
+        if(sim > 0) {
+          console.log('Multiple case')
+          this.warningMessage = 'There already exist ' + sim + ' similar feature requests!'
+        }
+        this.respMessage = message;
+        
       },
       (error) => {
         console.log(error);
-        this.respMessage = 'Error in adding.'
+        this.errorMessage = 'Error in adding. Please check your input.  '
       }
     )
   }

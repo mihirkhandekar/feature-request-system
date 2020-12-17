@@ -17,16 +17,10 @@ class FeatureRequest(db.Model):
         self.description = description
         self.client = client
         self.date = datetime.strptime(date, "%Y-%m-%d")
+        if self.date.date() < datetime.now().date():
+            raise Exception('Date cannot be in the past')
         self.priority = priority
         self.productarea = productarea
-
-
-
-def add_request(name, description, client, date, priority, productarea):
-    feat_request = FeatureRequest(name, description, client, date, priority, productarea)
-    db.session.add(feat_request)
-    db.session.commit()
-    return feat_request
 
 
 if __name__ == "__main__":

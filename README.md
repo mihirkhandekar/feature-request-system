@@ -54,7 +54,7 @@ This feature helps the employee understand how popular a feature is, while addin
 
 ### Feature Requests listing
 This feature lists all the features added in the database.
-![Feature Request Listing](images/feat_request_listing.png "Feature Request Listing")
+![Feature Request Listing](images/feat_request_list.png "Feature Request Listing")
 
 
 ## Installation and Deployment

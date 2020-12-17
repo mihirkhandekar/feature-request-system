@@ -1,14 +1,16 @@
-from flask import render_template, request
-from flask import jsonify, make_response
+from flask import jsonify, make_response, render_template, request
 from flask_cors import CORS, cross_origin
-
 from service.service import add_request, get_all_requests
+
 from app import app
 
 
 @app.route('/api/featurerequest', methods=['GET', 'POST'])
 @cross_origin()
 def add():
+    '''
+    HTTP Method to get all feature requests or submit a new feature request
+    '''
     if request.method == 'GET':
         response = get_all_requests()
         return make_response(jsonify(response), 200)
@@ -22,9 +24,8 @@ def add():
 
     try:
         sim_count = add_request(name, description, client,
-                            date, priority, productarea)
+                                date, priority, productarea)
         return jsonify({'message': 'Successfully added!', 'similarity_count': sim_count}), 201
     except Exception as e:
         print(e)
         return jsonify({'message': str(e)}), 400
-    

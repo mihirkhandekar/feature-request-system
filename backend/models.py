@@ -1,7 +1,14 @@
-from app import db
+# Call models.py directly to initialize tables
+
 from datetime import datetime
 
+from app import db
+
+
 class FeatureRequest(db.Model):
+    '''
+    Model class for FeatureRequest. Contains fields and methods for class.
+    '''
     id = db.Column(db.Integer, primary_key=True)
 
     name = db.Column(db.String(100))
@@ -10,7 +17,6 @@ class FeatureRequest(db.Model):
     date = db.Column(db.DateTime)
     priority = db.Column(db.Integer)
     productarea = db.Column(db.String(100))
-
 
     def __init__(self, name, description, client, date, priority, productarea):
         self.name = name
@@ -24,6 +30,6 @@ class FeatureRequest(db.Model):
 
 
 if __name__ == "__main__":
-    print("Creating database tables...")
+    print("Creating database tables")
     db.create_all()
     print("Done!")

@@ -1,6 +1,6 @@
-# Feature Request System
+# Feature Request Application
 
-This projects helps a company employee register and view feature requests suggested by clients. The application provides an interface to input the required details of a request, and saves it to the database.
+This project helps a company employee register and view feature requests suggested by clients. The application provides an interface to input the required details of a request, and saves it to the database.
 
 ## Prerequisites
 To run and use this application, the following prerequisites are required. The project with the below dependencies have been tested on Ubuntu 20.04 and Ubuntu 18.04 Servers.
@@ -76,7 +76,9 @@ It is recommended that the dependencies for Python are installed in a virtual en
 To do this, first install virtualenv, create a virtual environment and then activate it, before installing dependencies and running the program.
 
 > pip3 install virtualenv
+
 > python3 -m virtualenv venv
+
 > source venv/bin/activate
 
 To run the UI service, run the following command.

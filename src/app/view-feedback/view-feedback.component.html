@@ -18,10 +18,17 @@
             <td>{{customer.client}}</td>
             <td>{{customer.priority}}</td>
             <td>{{customer.date | date :short}}</td>
-            <td>{{customer.area}}</td>
+            <td>{{customer.productarea}}</td>
         </tr>
+
     </tbody>
 </table>
+
+<mat-paginator class="alert-warning" #paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+    (page)="pageEvent = getServerData($event)">
+</mat-paginator>
+
+
 <!--<table class="table table-sm table-striped table-bordered">
     <th *ngFor="let column of headers">
         {{column}}

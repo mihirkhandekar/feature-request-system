@@ -1,13 +1,20 @@
+import os
+
 from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 cors = CORS(app)
+
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # SQLAlchemy database can be set up according to requirements
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/features.db'
+if 'DB_NAME' in os.environ:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DB_NAME']
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/features.db'
+
 db = SQLAlchemy(app)
 
 

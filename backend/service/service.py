@@ -1,12 +1,17 @@
 import sys
 
 import numpy as np
+from flask import request
+from flask_rest_paginate import Pagination
+from flask_restful import fields
 from models import FeatureRequest
 from service.ml.similarity_checker import get_difference_score
 
+import app
 from app import db
 
 SIMILARITY_THRESHOLD = 0.7  # Configurable threshold to consider 2 sentences as simliar
+ROWS_PER_PAGE = 8
 
 
 def get_common_description_count(descriptions, description):
@@ -14,7 +19,6 @@ def get_common_description_count(descriptions, description):
     Function to compare description with all descriptions and return number of descriptions with simlarity score higher than threshold
     '''
     count = 0
-    print(descriptions)
     for db_description in descriptions:
         score = get_difference_score(db_description, description)
         if score > SIMILARITY_THRESHOLD:
@@ -56,13 +60,20 @@ def add_request(name, description, client, date, priority, productarea):
     return sim_count
 
 
-def get_all_requests():
+def get_page_requests(page):
     '''
     Function to fetch and return all feature requests
     '''
-    rqs = FeatureRequest.query.all()
-    response = []
-    for rq in rqs:
-        response.append({'name': rq.name, 'description': rq.description, 'date': rq.date,
-                         'priority': rq.priority, 'client': rq.client, 'area': rq.productarea})
-    return response
+    app.app.config['PAGINATE_PAGE_SIZE'] = ROWS_PER_PAGE
+    pagination = Pagination(app.app, db)
+
+    schema = {
+        'name': fields.String,
+        'description': fields.String,
+        'date': fields.String,
+        'priority': fields.Integer,
+        'client': fields.String,
+        'productarea': fields.String
+    }
+
+    return pagination.paginate(FeatureRequest, schema)

@@ -1,6 +1,6 @@
 from flask import jsonify, make_response, render_template, request
 from flask_cors import CORS, cross_origin
-from service.service import add_request, get_all_requests
+from service.service import add_request, get_page_requests
 
 from app import app
 
@@ -12,8 +12,9 @@ def add():
     HTTP Method to get all feature requests or submit a new feature request
     '''
     if request.method == 'GET':
-        response = get_all_requests()
-        return make_response(jsonify(response), 200)
+        page = request.args.get('page', 1, type=int)
+        response = get_page_requests(page)
+        return jsonify(response)
 
     name = request.form.get('name')
     description = request.form.get('description')

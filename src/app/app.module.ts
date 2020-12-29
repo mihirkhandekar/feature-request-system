@@ -7,6 +7,9 @@ import { SubmitFeedbackComponent } from './submit-feedback/submit-feedback.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewFeedbackComponent } from './view-feedback/view-feedback.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { ViewFeedbackComponent } from './view-feedback/view-feedback.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

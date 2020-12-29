@@ -14,6 +14,8 @@ export class SubmitFeedbackComponent implements OnInit {
   respMessage: string = '';
   errorMessage:string = '';
   warningMessage:string = '';
+  selectedArea:string = 'Assessments';
+  selectedClient:string = 'Client A';
   today=new Date()
   constructor(
     public fb: FormBuilder,
@@ -48,8 +50,8 @@ export class SubmitFeedbackComponent implements OnInit {
     formData.append("date", this.form.get('date').value);
     formData.append("priority", this.form.get('priority').value);
     formData.append("productarea", this.form.get('productarea').value);
-
-    this.http.post('http://localhost:5000/api/featurerequest', formData).subscribe(
+    var ip = window.location.hostname
+    this.http.post('http://' + ip +':5000/api/featurerequest', formData).subscribe(
       (response:Response) => {
         console.log(response);
         var message = response['message']

@@ -7,8 +7,8 @@
             <input class="form-control" placeholder="Description" formControlName="description" ng-required="1">
         </div>
         <div class="form-group input-group-lg">
-            <select class="form-control" placeholder="Client" formControlName="client" ng-required="1">
-                <option value="Client A" ng-selected="selected">Client A</option>
+            <select class="form-control" placeholder="Client" formControlName="client" ng-required="1" [(ngModel)]="selectedClient">
+                <option value="Client A" selected>Client A</option>
                 <option value="Client B">Client B</option>
                 <option value="Client C">Client C</option>
             </select>
@@ -23,8 +23,8 @@
         </div>
 
         <div class="form-group input-group-lg">
-            <select class="form-control" placeholder="Product Area" formControlName="productarea" ng-required="1">
-                <option value="Assessments" ng-selected="selected">Assessments</option>
+            <select class="form-control" placeholder="Product Area" formControlName="productarea" ng-required="1" [(ngModel)]="selectedArea">
+                <option value="Assessments" selected>Assessments</option>
                 <option value="Billing">Billing</option>
                 <option value="Recruit">Recruit</option>
                 <option value="Reports">Reports</option>

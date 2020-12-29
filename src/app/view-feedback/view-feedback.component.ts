@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @Component({
@@ -9,28 +10,41 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./view-feedback.component.css']
 })
 
-/*export class Parameters {
-  'date': string;
-  'name': string;
-  'description': string;
-  'client': string;
-}*/
 
 export class ViewFeedbackComponent implements OnInit {
 
   headers = ["ID", "Name", "Age", "Gender", "Country"];
-  responseArray: any
+  responseArray: any;
+  length: any;
+  pageIndex: any;
+  pageSize: any;
 
   constructor(
     private http: HttpClient
   ) {
-    this.http.get('http://localhost:5000/api/featurerequest').subscribe(
+    var ip = window.location.hostname
+    this.http.get('http://'+ip+':5000/api/featurerequest?page=1').subscribe(
       (response) => {
-        console.log(response)
-        this.responseArray = response
+        this.responseArray = response['data']
+        this.length = response['pagination']['totalElements']
+        this.pageIndex = 0
+        this.pageSize = 5
+
       }
     )
+  }
 
+  getServerData(event){
+    var newPageIndex = event['pageIndex'] + 1
+    var ip = window.location.hostname
+    this.http.get('http://'+ip+':5000/api/featurerequest?page=' + newPageIndex).subscribe(
+      (response) => {
+        this.responseArray = response['data']
+        this.length = response['pagination']['totalElements']
+        this.pageIndex = newPageIndex - 1
+        this.pageSize = 5
+      }
+    )
   }
 
   ngOnInit() {

@@ -3,6 +3,7 @@
 from datetime import datetime
 
 from app import db
+from sqlalchemy.schema import UniqueConstraint
 
 
 class FeatureRequest(db.Model):
@@ -18,6 +19,8 @@ class FeatureRequest(db.Model):
     priority = db.Column(db.Integer)
     productarea = db.Column(db.String(100))
 
+    constraint = db.UniqueConstraint('client', 'priority', name='clientpriority')
+
     def __init__(self, name, description, client, date, priority, productarea):
         self.name = name
         self.description = description
@@ -27,6 +30,7 @@ class FeatureRequest(db.Model):
             raise Exception('Date cannot be in the past')
         self.priority = priority
         self.productarea = productarea
+        self.__table_args__ = (self.constraint)
 
 
 if __name__ == "__main__":

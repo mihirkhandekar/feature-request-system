@@ -28,7 +28,7 @@ export class ViewFeedbackComponent implements OnInit {
         this.responseArray = response['data']
         this.length = response['pagination']['totalElements']
         this.pageIndex = 0
-        this.pageSize = 5
+        this.pageSize = 8
 
       }
     )
@@ -39,10 +39,10 @@ export class ViewFeedbackComponent implements OnInit {
     var ip = window.location.hostname
     this.http.get('http://'+ip+':5000/api/featurerequest?page=' + newPageIndex).subscribe(
       (response) => {
+        this.pageIndex = newPageIndex - 1
+        this.pageSize = 8
         this.responseArray = response['data']
         this.length = response['pagination']['totalElements']
-        this.pageIndex = newPageIndex - 1
-        this.pageSize = 5
       }
     )
   }

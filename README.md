@@ -104,6 +104,5 @@ The `--build` argument can be skipped to avoid rebuilding the images. The ports,
 - Deletion, editing features in listing table.
 - More and comprehensive test cases.
 ### UI Improvements
-- Pagination in table to retrieve and view only a page of results.
 - Usage of all Angular features, without some hardcoding.
 - Validation of form fields in frontend with appropriate error message.

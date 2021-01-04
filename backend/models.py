@@ -19,7 +19,7 @@ class FeatureRequest(db.Model):
     priority = db.Column(db.Integer)
     productarea = db.Column(db.String(100))
 
-    constraint = UniqueConstraint('client', 'priority', name='clientpriority')
+    constraint = db.UniqueConstraint('client', 'priority', name='clientpriority')
 
     def __init__(self, name, description, client, date, priority, productarea):
         self.name = name

@@ -19,7 +19,7 @@ class FeatureRequest(db.Model):
     priority = db.Column(db.Integer)
     productarea = db.Column(db.String(100))
 
-    UniqueConstraint('client', 'priority', name='clientpriority')
+    constraint = UniqueConstraint('client', 'priority', name='clientpriority')
 
     def __init__(self, name, description, client, date, priority, productarea):
         self.name = name
@@ -30,6 +30,7 @@ class FeatureRequest(db.Model):
             raise Exception('Date cannot be in the past')
         self.priority = priority
         self.productarea = productarea
+        self.__table_args__ = (self.constraint)
 
 
 if __name__ == "__main__":
